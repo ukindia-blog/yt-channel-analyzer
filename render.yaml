@@ -1,0 +1,29 @@
+# Render Blueprint — deploys the app as one free Web Service (Express serves API + frontend).
+# After "New > Blueprint", fill the empty env values in the Render dashboard.
+services:
+  - type: web
+    name: yt-channel-analyzer
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: YOUTUBE_API_KEY
+        sync: false # <-- paste in Render dashboard
+      - key: YOUTUBE_API_KEY_2
+        sync: false
+      - key: YOUTUBE_API_KEY_3
+        sync: false
+      - key: YOUTUBE_API_KEY_4
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false # <-- needed at BUILD time (baked into frontend)
+      - key: GOOGLE_CLIENT_ID
+        value: 505507899807-hd19mpo852t01hv2kutq9v5frrf0523n.apps.googleusercontent.com
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false # <-- paste in Render dashboard
+      - key: SESSION_SECRET
+        generateValue: true # Render auto-generates a random secret
